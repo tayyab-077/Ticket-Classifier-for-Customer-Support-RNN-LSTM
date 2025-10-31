@@ -23,4 +23,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: <your_dockerhub_username>/<image_name>:latest
+          tags: tayyab77/ticket-classifier:latest
+
