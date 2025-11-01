@@ -1,0 +1,6 @@
+{
+  "name": "Ticket Classifier",
+  "image": "tayyab77/ticket-classifier:latest",
+  "forwardPorts": [8501],
+  "postCreateCommand": "streamlit run app.py"
+}
