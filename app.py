@@ -1,11 +1,26 @@
+import os
+import warnings
+
+# Disable GPU and all TensorFlow info logs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"   # 0=all, 1=info, 2=warnings, 3=errors
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"  # Disable oneDNN optimization logs
+
+# Suppress Python warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", message=".*compile_metrics.*")
+
+# TensorFlow logging fix (no deprecation warning)
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+
+# Now import everything else
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 import streamlit as st
 import numpy as np
-import re, string
-import pickle
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import load_model
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # 0 = all, 1 = info, 2 = warnings, 3 = errors
+import re, string, pickle
+
 
 # Load resources
 @st.cache_resource
